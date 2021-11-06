@@ -1,3 +1,5 @@
+// SOLUTIONS FROM CODESIGNAL
+
 // ADD TWO DIGITS
 // function addTwoDigits(n) {
 //   let d = 0;
@@ -42,5 +44,4 @@ function seatsInTheater(nCols, nRows, col, row) {
   console.log(d);
   console.log(e);
 }
-
 seatsInTheater(13, 6, 8, 3);
