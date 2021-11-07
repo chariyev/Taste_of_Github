@@ -90,7 +90,11 @@ const tour = new FlyTo("Turkey", "Russia", "Canada");
 // let objKeys = Object.keys(tour);  // all keys of "tour" function was returned in an array ---- same as """for in loop"""
 // console.log(objKeys);
 
-let objValues = Object.values(tour); // all values of "tour" function was return in an array ---- same as """for of loop"""
-console.log(objValues);
+// let objValues = Object.values(tour); // all values of "tour" function was return in an array ---- same as """for of loop"""
+// console.log(objValues);
+
+// if ("p1" in tour) console.log("p1 is in tour, exactly"); // another version of include in javascript
 
 // PRIMITIVES ARE COPIED BY THEIR VALUES - IN CONTRAST OBJECTS (OBJECT, FUNCTION, ARRAY) ARE COPIED BY THEIR REFERENCES
+// ABSTRACTION ----- HIDE THE DETAILS AND SHOW ONLY ESSENTIAL --- CORE CONSEPT OF OOP FOR ABSTRACTION ----- TO HIDE IMPLEMENTATION DETAILS NEED TO DECLARE IT INSIDE A FUNCTION AS A LOCAL VARIABLE, THANKS FOR THIS IT WILL BE HIDDEN FOR OUTSIDE --- IT CALLS AS A PRIVATE METHOD
+// SCOPE IS TEMPORARY BUT CONTRAST TO SCOPE, CLOSER STAYS INSIDE FUNCTION AND CAN RECREATED BY USING THAT FUNCTION
