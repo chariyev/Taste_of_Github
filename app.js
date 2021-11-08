@@ -1,5 +1,5 @@
-const { urlencoded } = require("express");
 const express = require("express");
+const { urlencoded } = require("express");
 const home = require("./routes/home");
 const products = require("./routes/products");
 const customers = require("./routes/customers");
