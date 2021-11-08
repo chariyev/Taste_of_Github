@@ -5,7 +5,7 @@ node_modules
 Nortwin_TURKCE.sql
 
 
-## DATABASE FOLDER
-config
+## CONFIG FILES
+config/*.env
 
 
