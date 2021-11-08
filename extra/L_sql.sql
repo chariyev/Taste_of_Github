@@ -12,7 +12,3 @@ USE Northwind
 
 
 
-Create table customers
-(
-    
-)
