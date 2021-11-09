@@ -15,13 +15,15 @@ CREATE TABLE customers
 )
 -- drop table customers
 
-INSERT customers
-    (firstname, lastname, age)
-VALUES('Wolfang', 'Wongyote', 90)
+-- INSERT customers
+--     (firstname, lastname, age)
+-- VALUES('Wolfang', 'Wongyote', 90)
 
-UPDATE customers Set firstname='Asym', age = 6 where id = 10
+-- UPDATE customers Set firstname='Asym', age = 6 where id = 10
 
 USE Northwind
+DELETE from customers where firstname = null and lastname = null
+
 SELECT *
 FROM customers
-WHERE age > 35
+
