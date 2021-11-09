@@ -15,9 +15,13 @@ CREATE TABLE customers
 )
 -- drop table customers
 
-INSERT customers(firstname, lastname, age) VALUES('Gurbandurdy', 'Zelili', 350)
+INSERT customers
+    (firstname, lastname, age)
+VALUES('Wolfang', 'Wongyote', 90)
 
-UPDATE customers Set age = 75 where firstname = 'Berdinazar'
+UPDATE customers Set firstname='Asym', age = 6 where id = 10
 
 USE Northwind
-SELECT * FROM customers WHERE age > 35
+SELECT *
+FROM customers
+WHERE age > 35
