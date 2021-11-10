@@ -6,14 +6,13 @@
 -- SELECT * FROM Musteriler -- select all columns from specified tables
 -- SELECT adi, soyadi FROM Personeller -- adi, soyadi columns was displayed
 
--- CREATE TABLE customers
+-- CREATE TABLE products
 -- (
 --     id int PRIMARY KEY IDENTITY(1,1),
---     firstname NVARCHAR(max),
---     lastname NVARCHAR(max),
---     age int,
+--     productName NVARCHAR(max),
+--     price int,
+--     quantity int,
 -- )
--- USE Northwind
 -- drop table customers
 
 -- INSERT customers
@@ -24,6 +23,7 @@
 
 -- DELETE from customers where firstname = null and lastname = null
 
+-- USE Northwind
 -- SELECT *
--- FROM customers
+-- FROM products
 

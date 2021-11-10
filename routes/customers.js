@@ -1,6 +1,5 @@
 const express = require('express');
 const customers = require('../models/customers.model');
-const db = require('../config/db');
 const router = express.Router();
 
 //GET ALL CUSTOMERS
@@ -72,7 +71,7 @@ router.post('/update/:id', async (req, res) => {
 
 	if (!ctmr) {
 		return res.status(400).send({
-			message: `No customer exist with id ${id}, ${firstName}, ${lastName}`,
+			message: `No customer exist with id ${id}`,
 		});
 	}
 
@@ -88,7 +87,7 @@ router.post('/update/:id', async (req, res) => {
 		}
 		ctmr.save();
 		return res.status(200).send({
-			messeage: `Customer with id ${id} has been updated!`,
+			message: `Customer with id ${id} has been updated!`,
 		});
 	} catch (err) {
 		return res.status(400).json({
@@ -100,7 +99,7 @@ router.post('/update/:id', async (req, res) => {
 //DELETE A CUSTOMER
 
 router.post('/delete/:id', async (req, res) => {
-	let { id } = req.body;
+	let { id } = req.params;
 
 	if (!id) {
 		return res.status(400).send({
@@ -118,7 +117,6 @@ router.post('/delete/:id', async (req, res) => {
 			message: `No customer exist with id ${id}`,
 		});
 	}
-
 	try {
 		await ctmr.destroy();
 		return res.status(200).send({
