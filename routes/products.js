@@ -111,7 +111,23 @@ router.post('/update/:id', async (req, res) => {
 //DELETE A PRODUCT
 router.post('/delete/:id', async (req, res) => {
 	let { id } = req.params; // let {id} = req.body  // ---- need provide id number that wanted
+	let prod = await products.findOne({
+		where: {
+			id,
+		},
+	});
+
+	if (!prod) {
+		return res.status(400).send({
+			message: `No product exist with id ${id}`,
+		});
+	}
+
 	try {
+		await prod.destroy();
+		return res.status(200).send({
+			message: `Selected product ${id} has been succefully deleted `,
+		});
 	} catch (err) {}
 });
 
