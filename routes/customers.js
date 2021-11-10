@@ -3,110 +3,130 @@ const customers = require('../models/customers.model');
 const db = require('../config/db');
 const router = express.Router();
 
-//GET REQUEST
-router.get('/', (req, res) => {
-	customers
-		.findAll()
-		.then((customers) => {
-			res.status(200).json(customers);
-			console.log(customers);
-		})
-		.catch((err) => console.log('Error name', err));
-});
-
-// router.get('/add', async (req, res) => {
-// 	const data = await customers
-// 		.create({
-// 			firstName: 'Gurban',
-// 			lastName: 'Gurbanow',
-// 			age: 56,
-// 		})
-// 		.then((data) => res.json(data))
-// 		.catch((err) => console.log(err));
-// });
-
-//CREATE USER
-router.post('/createCustomer', async (req, res) => {
-	let { firstname, lastname, age } = req.body;
-	let ifExist = await customers.findOne({
-		where: {
-			firstname,
-			lastname,
-		},
-	});
-	if (ifExist) {
-		return res.status(400).json({
-			message: `This customer is already exist ${firstname} and ${lastname}`,
-		});
-	}
+//GET ALL CUSTOMERS
+router.get('/', async (req, res) => {
+	let allCustomers = await customers.findAll();
 	try {
-		let newCustomer = await customers.create({
-			firstname,
-			lastname,
-			age,
-		});
-		return res.send(newCustomer);
+		return res.status(200).send(allCustomers);
 	} catch (err) {
-		return res.status(500).send({
-			message: `Error: ${err.message}`,
+		return res.status(400).json({
+			messages: `Error ${err}`,
 		});
 	}
 });
 
-//POST REQUEST
+//CREATE A CUSTOMER
+router.post('/create', async (req, res) => {
+	let { firstName, lastName, age } = req.body;
 
-//GET REQUEST
+	let createdCustomer = await customers.create({
+		firstName,
+		lastName,
+		age,
+	});
+
+	try {
+		return res.status(201).send(createdCustomer);
+	} catch (err) {
+		return res.status(400).json({
+			message: `Error occured: ${err}`,
+		});
+	}
+});
+
+//GET A CUSTOMER
 router.get('/:id', async (req, res) => {
-	let id = req.params.id;
+	let { id } = req.params;
 
-	let customer = await customers.findOne({
+	let getCustomer = await customers.findOne({
 		where: {
-			id: id,
+			id,
 		},
 	});
 
-	if (!customer) {
+	if (!getCustomer) {
 		return res.status(400).send({
-			message: 'ты что дурак?!',
-		});
-	}
-	return res.send(customer);
-});
-
-router.patch('/', async (req, res) => {
-	let { firstname, lastname, age } = req.body;
-
-	let alreadyExist = await customers.findOne({
-		where: {
-			firstname,
-			lastname,
-			age,
-		},
-	});
-
-	if (alreadyExist) {
-		return res.status(200).json({
-			message: `This ${firstname} already exist`,
+			status: `Error occured: ${new Error()}`,
 		});
 	}
 
 	try {
-		let customerUpdate = await customers.update(
-			{
-				firstname,
-				lastname,
-				age,
-			},
-			{
-				where: {
-					firstname: null,
-				},
-			}
-		);
-		return res.send(customerUpdate);
+		return res.status(200).send(getCustomer);
 	} catch (err) {
 		return res.status(400).json({
-			messages: `Error: ${err}`,
+			message: `Error occured: ${err}`,
+		});
+	}
+});
+
+//UPDATE A CUSTOMER
+router.post('/update/:id', async (req, res) => {
+	let { firstName, lastName, age } = req.body;
+	let { id } = req.params;
+
+	let ctmr = await customers.findOne({
+		where: {
+			id,
+		},
+	});
+
+	if (!ctmr) {
+		return res.status(400).send({
+			message: `No customer exist with id ${id}, ${firstName}, ${lastName}`,
+		});
+	}
+
+	try {
+		if (firstName) {
+			ctmr.firstName = firstName;
+		}
+		if (lastName) {
+			ctmr.lastName = lastName;
+		}
+		if (age) {
+			ctmr.age = age;
+		}
+		ctmr.save();
+		return res.status(200).send({
+			messeage: `Customer with id ${id} has been updated!`,
+		});
+	} catch (err) {
+		return res.status(400).json({
+			message: `Error occured: ${err}`,
+		});
+	}
+});
+
+//DELETE A CUSTOMER
+
+router.post('/delete/:id', async (req, res) => {
+	let { id } = req.body;
+
+	if (!id) {
+		return res.status(400).send({
+			message: `Provide the ID please`,
+		});
+	}
+
+	let ctmr = await customers.findOne({
+		where: {
+			id,
+		},
+	});
+	if (!ctmr) {
+		return res.send({
+			message: `No customer exist with id ${id}`,
+		});
+	}
+
+	try {
+		await ctmr.destroy();
+		return res.status(200).send({
+			message: `Customer with ID ${id} has been succefully deleted`,
+		});
+	} catch (err) {
+		return res.status(400).send({
+			message: `Error occured: ${err}`,
 		});
 	}
 });

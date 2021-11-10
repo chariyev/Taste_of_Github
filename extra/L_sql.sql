@@ -6,13 +6,14 @@
 -- SELECT * FROM Musteriler -- select all columns from specified tables
 -- SELECT adi, soyadi FROM Personeller -- adi, soyadi columns was displayed
 
-CREATE TABLE customers
-(
-    id int PRIMARY KEY IDENTITY(1,1),
-    firstname NVARCHAR(max),
-    lastname NVARCHAR(max),
-    age int,
-)
+-- CREATE TABLE customers
+-- (
+--     id int PRIMARY KEY IDENTITY(1,1),
+--     firstname NVARCHAR(max),
+--     lastname NVARCHAR(max),
+--     age int,
+-- )
+-- USE Northwind
 -- drop table customers
 
 -- INSERT customers
@@ -21,9 +22,8 @@ CREATE TABLE customers
 
 -- UPDATE customers Set firstname='Asym', age = 6 where id = 10
 
-USE Northwind
-DELETE from customers where firstname = null and lastname = null
+-- DELETE from customers where firstname = null and lastname = null
 
-SELECT *
-FROM customers
+-- SELECT *
+-- FROM customers
 
